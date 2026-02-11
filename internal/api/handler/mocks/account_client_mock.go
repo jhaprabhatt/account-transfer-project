@@ -1,8 +1,8 @@
 package mocks
 
 import (
-	pb "account-transfer-project/internal/proto"
 	"context"
+	pb "github.com/jhaprabhatt/account-transfer-project/internal/proto"
 
 	"github.com/stretchr/testify/mock"
 	"google.golang.org/grpc"

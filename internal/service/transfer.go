@@ -1,11 +1,11 @@
 package service
 
 import (
-	"account-transfer-project/internal/constants"
-	"account-transfer-project/internal/models"
-	"account-transfer-project/internal/repository"
 	"context"
 	"fmt"
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
+	"github.com/jhaprabhatt/account-transfer-project/internal/repository"
 
 	"go.uber.org/zap"
 )

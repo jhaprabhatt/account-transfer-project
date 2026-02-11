@@ -1,7 +1,7 @@
 package models
 
 import (
-	"account-transfer-project/internal/constants"
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
 
 	"github.com/shopspring/decimal"
 )

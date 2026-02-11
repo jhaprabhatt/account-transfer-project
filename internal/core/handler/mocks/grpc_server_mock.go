@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"account-transfer-project/internal/models"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 )
 
 type MockTransferService struct {

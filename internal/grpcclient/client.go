@@ -1,7 +1,7 @@
 package grpcclient
 
 import (
-	"account-transfer-project/internal/config"
+	"github.com/jhaprabhatt/account-transfer-project/internal/config"
 
 	"go.uber.org/zap"
 	"google.golang.org/grpc"

@@ -11,7 +11,7 @@ import (
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
 
-	"account-transfer-project/internal/models"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 )
 
 func TestAccountCache_SetAccount(t *testing.T) {

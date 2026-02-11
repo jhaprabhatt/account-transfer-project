@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"account-transfer-project/internal/constants"
-	"account-transfer-project/internal/models"
 	"context"
 	"database/sql"
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 	"time"
 
 	"github.com/shopspring/decimal"

@@ -1,4 +1,4 @@
-module account-transfer-project
+module github.com/jhaprabhatt/account-transfer-project
 
 go 1.25
 

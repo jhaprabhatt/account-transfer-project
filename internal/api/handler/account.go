@@ -8,8 +8,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"account-transfer-project/internal/models"
-	pb "account-transfer-project/internal/proto"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
+	pb "github.com/jhaprabhatt/account-transfer-project/internal/proto"
 )
 
 type AccountHandler struct {

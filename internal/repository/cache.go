@@ -1,11 +1,11 @@
 package repository
 
 import (
-	"account-transfer-project/internal/config"
-	"account-transfer-project/internal/models"
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/jhaprabhatt/account-transfer-project/internal/config"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 
 	"github.com/redis/go-redis/v9"
 )

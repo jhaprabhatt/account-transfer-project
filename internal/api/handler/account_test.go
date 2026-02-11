@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/mock"
 	"go.uber.org/zap"
 
-	"account-transfer-project/internal/api/handler/mocks"
-	pb "account-transfer-project/internal/proto"
+	"github.com/jhaprabhatt/account-transfer-project/internal/api/handler/mocks"
+	pb "github.com/jhaprabhatt/account-transfer-project/internal/proto"
 )
 
 func TestAccountHandler_CreateAccount(t *testing.T) {

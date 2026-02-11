@@ -1,18 +1,18 @@
 package handler
 
 import (
-	"account-transfer-project/internal/constants"
-	"account-transfer-project/internal/core/interceptors"
 	"context"
 	"errors"
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
+	"github.com/jhaprabhatt/account-transfer-project/internal/core/interceptors"
 
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"account-transfer-project/internal/models"
-	pb "account-transfer-project/internal/proto"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
+	pb "github.com/jhaprabhatt/account-transfer-project/internal/proto"
 )
 
 type TransferUseCase interface {

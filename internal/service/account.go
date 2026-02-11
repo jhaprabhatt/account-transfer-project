@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"account-transfer-project/internal/models"
-	"account-transfer-project/internal/repository"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
+	"github.com/jhaprabhatt/account-transfer-project/internal/repository"
 
 	"go.uber.org/zap"
 )

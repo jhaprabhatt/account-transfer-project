@@ -1,15 +1,15 @@
 package main
 
 import (
-	"account-transfer-project/internal/config"
-	"account-transfer-project/internal/core/handler"
-	"account-transfer-project/internal/core/interceptors"
-	"account-transfer-project/internal/logger"
-	pb "account-transfer-project/internal/proto"
-	"account-transfer-project/internal/repository"
-	"account-transfer-project/internal/service"
 	"context"
 	"database/sql"
+	"github.com/jhaprabhatt/account-transfer-project/internal/config"
+	"github.com/jhaprabhatt/account-transfer-project/internal/core/handler"
+	"github.com/jhaprabhatt/account-transfer-project/internal/core/interceptors"
+	"github.com/jhaprabhatt/account-transfer-project/internal/logger"
+	pb "github.com/jhaprabhatt/account-transfer-project/internal/proto"
+	"github.com/jhaprabhatt/account-transfer-project/internal/repository"
+	"github.com/jhaprabhatt/account-transfer-project/internal/service"
 	"net"
 
 	"go.uber.org/zap"

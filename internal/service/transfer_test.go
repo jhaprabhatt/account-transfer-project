@@ -10,9 +10,9 @@ import (
 	"github.com/stretchr/testify/mock"
 	"go.uber.org/zap"
 
-	"account-transfer-project/internal/models"
-	"account-transfer-project/internal/service"
-	"account-transfer-project/internal/service/mocks"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
+	"github.com/jhaprabhatt/account-transfer-project/internal/service"
+	"github.com/jhaprabhatt/account-transfer-project/internal/service/mocks"
 )
 
 func TestTransferService_MakeTransfer(t *testing.T) {

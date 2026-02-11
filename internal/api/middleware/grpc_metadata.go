@@ -4,7 +4,7 @@ import (
 	"context"
 	"strconv"
 
-	"account-transfer-project/internal/pkg/idgen"
+	"github.com/jhaprabhatt/account-transfer-project/internal/pkg/idgen"
 
 	"google.golang.org/grpc/metadata"
 

@@ -1,8 +1,8 @@
 package mocks
 
 import (
-	"account-transfer-project/internal/models"
 	"context"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 
 	"github.com/stretchr/testify/mock"
 )

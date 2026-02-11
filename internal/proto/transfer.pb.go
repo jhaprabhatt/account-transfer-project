@@ -164,7 +164,7 @@ const file_internal_proto_transfer_proto_rawDesc = "" +
 	"\baudit_id\x18\x03 \x01(\x03R\aauditId\x12,\n" +
 	"\x12new_source_balance\x18\x04 \x01(\tR\x10newSourceBalance2X\n" +
 	"\x0fTransferService\x12E\n" +
-	"\fMakeTransfer\x12\x19.transfer.TransferRequest\x1a\x1a.transfer.TransferResponseB)Z'account-transfer-project/internal/protob\x06proto3"
+	"\fMakeTransfer\x12\x19.transfer.TransferRequest\x1a\x1a.transfer.TransferResponseB@Z>github.com/jhaprabhatt/account-transfer-project/internal/protob\x06proto3"
 
 var (
 	file_internal_proto_transfer_proto_rawDescOnce sync.Once

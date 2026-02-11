@@ -12,11 +12,11 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"account-transfer-project/internal/constants"
-	"account-transfer-project/internal/core/handler/mocks"
-	"account-transfer-project/internal/core/interceptors"
-	"account-transfer-project/internal/models"
-	pb "account-transfer-project/internal/proto"
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
+	"github.com/jhaprabhatt/account-transfer-project/internal/core/handler/mocks"
+	"github.com/jhaprabhatt/account-transfer-project/internal/core/interceptors"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
+	pb "github.com/jhaprabhatt/account-transfer-project/internal/proto"
 )
 
 func TestGrpcHandler_MakeTransfer(t *testing.T) {

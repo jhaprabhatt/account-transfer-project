@@ -1,12 +1,12 @@
 package main
 
 import (
-	"account-transfer-project/internal/api/handler"
-	atm "account-transfer-project/internal/api/middleware"
-	"account-transfer-project/internal/grpcclient"
-	"account-transfer-project/internal/logger"
-	"account-transfer-project/internal/pkg/idgen"
-	pb "account-transfer-project/internal/proto"
+	"github.com/jhaprabhatt/account-transfer-project/internal/api/handler"
+	atm "github.com/jhaprabhatt/account-transfer-project/internal/api/middleware"
+	"github.com/jhaprabhatt/account-transfer-project/internal/grpcclient"
+	"github.com/jhaprabhatt/account-transfer-project/internal/logger"
+	"github.com/jhaprabhatt/account-transfer-project/internal/pkg/idgen"
+	pb "github.com/jhaprabhatt/account-transfer-project/internal/proto"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"

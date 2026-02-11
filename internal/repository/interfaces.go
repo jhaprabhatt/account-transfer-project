@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"account-transfer-project/internal/models"
 	"context"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 )
 
 type AccountRepo interface {

@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"account-transfer-project/internal/constants"
 	"context"
 	"database/sql"
 	"errors"
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap"
 
-	"account-transfer-project/internal/models"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 )
 
 func setupTest(t *testing.T) (*sql.DB, sqlmock.Sqlmock, *AccountRepository) {

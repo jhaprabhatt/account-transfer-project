@@ -129,7 +129,7 @@ const file_internal_proto_account_proto_rawDesc = "" +
 	"\x15CreateAccountResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess2b\n" +
 	"\x0eAccountService\x12P\n" +
-	"\rCreateAccount\x12\x1e.transfer.CreateAccountRequest\x1a\x1f.transfer.CreateAccountResponseB)Z'account-transfer-project/internal/protob\x06proto3"
+	"\rCreateAccount\x12\x1e.transfer.CreateAccountRequest\x1a\x1f.transfer.CreateAccountResponseB@Z>github.com/jhaprabhatt/account-transfer-project/internal/protob\x06proto3"
 
 var (
 	file_internal_proto_account_proto_rawDescOnce sync.Once

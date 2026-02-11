@@ -1,17 +1,17 @@
 package repository
 
 import (
-	"account-transfer-project/internal/constants"
 	"context"
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
 
 	"go.uber.org/zap"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 
-	"account-transfer-project/internal/models"
+	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 )
 
 type AccountRepository struct {
