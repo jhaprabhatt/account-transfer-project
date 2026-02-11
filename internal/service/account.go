@@ -2,11 +2,12 @@ package service
 
 import (
 	"context"
-	"errors"
 	"fmt"
 
+	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
 	"github.com/jhaprabhatt/account-transfer-project/internal/models"
 	"github.com/jhaprabhatt/account-transfer-project/internal/repository"
+	"github.com/shopspring/decimal"
 
 	"go.uber.org/zap"
 )
@@ -50,7 +51,11 @@ func (s *AccountService) LoadAllAccountsToCache(ctx context.Context) error {
 
 func (s *AccountService) CreateAccount(ctx context.Context, acc *models.Account) error {
 	if exists, err := s.cache.Exists(ctx, acc.ID); err == nil && exists {
-		return errors.New("account already exists")
+		return constants.ErrAccountAlreadyExists
+	}
+
+	if acc.Balance.LessThan(decimal.Zero) {
+		return constants.ErrAmountMustNotBeNegative
 	}
 
 	if err := s.accRepo.CreateAccount(ctx, acc); err != nil {

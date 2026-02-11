@@ -11,6 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      - postgres_data:/var/lib/postgresql/data
       - ./deploy/postgress/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U user -d account_transfer_db"]
@@ -55,3 +56,5 @@ services:
       - CORE_HOST=core-service:50051
     depends_on:
       - core-service
+volumes:
+  postgres_data:

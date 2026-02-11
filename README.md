@@ -277,8 +277,6 @@ This separation enables:
 ├── go.mod
 └── README.md
 ```
-
-
 ---
 
 ## 🛠 Getting Started
@@ -296,7 +294,6 @@ This separation enables:
 git clone https://github.com/jhaprabhatt/account-transfer-project.git
 cd account-transfer-project
 ```
-
 ---
 
 ### Environment Variables
@@ -326,6 +323,109 @@ CORE_HOST=localhost:50051
 ```bash
 docker-compose up --build
 ```
+
+---
+
+## 🧪 Post Deployment Verification (PDV)
+
+This project includes a Post Deployment Verification (PDV) script to validate the system after deployment.
+
+The PDV ensures:
+
+- Account creation works
+- Duplicate account detection works
+- Negative balance validation works
+- Transfer succeeds
+- Invalid account IDs are rejected
+- Same source/destination transfer is rejected
+- Insufficient funds is rejected
+- Negative transfer amount is rejected
+
+---
+
+### 🔎 What PDV Validates
+
+| Scenario | Expected HTTP Code |
+|----------|-------------------|
+| Account Created | 201 |
+| Duplicate Account | 409 |
+| Negative Balance | 400 |
+| Successful Transfer | 200 |
+| Invalid Account ID | 400 |
+| Same Account Transfer | 400 |
+| Insufficient Funds | 422 |
+| Negative Transfer Amount | 400 |
+
+---
+
+### ▶️ How to Run PDV
+
+Make sure all services are running:
+
+```bash
+docker compose up -d
+```
+
+Then execute:
+
+```bash
+chmod +x scripts/post_deployment_verification.sh
+BASE_URL=http://localhost:8080 ./scripts/post_deployment_verification.sh
+```
+
+---
+
+### 📌 Example Output
+
+```
+$ ./post_deployment_verification.sh
+Running Post Deployment Verification against: http://localhost:8080
+
+✅ PASS: POST /accounts (HTTP 201, correlation_id=2021546445781340160)
+✅ PASS: POST /accounts (HTTP 201, correlation_id=2021546446972522496)
+✅ PASS: POST /accounts (HTTP 409, correlation_id=2021546448159510528)
+✅ PASS: POST /accounts (HTTP 400, correlation_id=2021546449510076416)
+✅ PASS: POST /accounts (HTTP 201, correlation_id=2021546450688675840)
+✅ PASS: POST /transfers (HTTP 200, correlation_id=2021546451988910080)
+✅ PASS: POST /transfers (HTTP 400, correlation_id=2021546453335281664)
+✅ PASS: POST /transfers (HTTP 400, correlation_id=2021546454564212736)
+✅ PASS: POST /transfers (HTTP 400, correlation_id=2021546456011247616)
+✅ PASS: POST /transfers (HTTP 400, correlation_id=2021546457382785024)
+✅ PASS: POST /transfers (HTTP 400, correlation_id=2021546458607521792)
+✅ PASS: POST /transfers (HTTP 422, correlation_id=2021546460167802880)
+✅ PASS: POST /transfers (HTTP 400, correlation_id=2021546461455454208)
+
+🎉 Post Deployment Verification completed successfully.
+
+
+```
+
+---
+
+### 🧠 Why PDV Is Important
+
+The PDV script validates both:
+
+- Transport layer correctness (HTTP responses)
+- Business rule enforcement
+- Status code semantics
+- System wiring (API ↔ Core ↔ DB ↔ Redis)
+
+It ensures the deployment is healthy beyond simple health checks.
+
+---
+
+### ⚠️ Notes
+
+- The PDV script generates unique account IDs to avoid collisions.
+- If you want a clean database state before running PDV:
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
+This removes the PostgreSQL volume and reinitializes the database.
 
 ---
 

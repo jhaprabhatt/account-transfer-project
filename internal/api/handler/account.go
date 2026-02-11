@@ -45,6 +45,12 @@ func (h *AccountHandler) CreateAccount(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		if ok && st.Code() == codes.InvalidArgument {
+			h.log.Warn("Negative account balance", zap.Error(err))
+			http.Error(w, "amount must be greater than or equal to zero", http.StatusBadRequest)
+			return
+		}
+
 		h.log.Error("gRPC call failed", zap.Error(err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return

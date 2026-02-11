@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"errors"
+
 	"github.com/jhaprabhatt/account-transfer-project/internal/constants"
 	"github.com/jhaprabhatt/account-transfer-project/internal/core/interceptors"
 
@@ -58,6 +59,10 @@ func (h *GrpcHandler) CreateAccount(ctx context.Context, req *pb.CreateAccountRe
 
 		if errors.Is(err, constants.ErrAccountAlreadyExists) {
 			return nil, status.Error(codes.AlreadyExists, "account already exists")
+		}
+
+		if errors.Is(err, constants.ErrAmountMustNotBeNegative) {
+			return nil, status.Error(codes.InvalidArgument, "")
 		}
 
 		return nil, status.Error(codes.Internal, "internal system error")
