@@ -306,9 +306,9 @@ LOG_LEVEL=info
 
 DB_HOST=localhost
 DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=secret
-DB_NAME=banking_db
+DB_USER=user
+DB_PASSWORD=password
+DB_NAME=account_transfer_db
 
 REDIS_ADDR=localhost:6379
 REDIS_PASSWORD=
