@@ -1,6 +1,6 @@
 # 🏦 Account Transfer System
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/jhaprabhatt/account-transfer-project)](https://goreportcard.com/report/github.com/jhaprabhatt/account-transfer-project)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jhaprabhatt/account-transfer-project?refresh=1)](https://goreportcard.com/report/github.com/jhaprabhatt/account-transfer-project)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/jhaprabhatt/account-transfer-project)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
