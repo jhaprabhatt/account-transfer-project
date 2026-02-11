@@ -33,7 +33,12 @@ func (r *TransferRepository) Transfer(ctx context.Context, req *models.TransferR
 		r.log.Error("failed to begin tx", zap.Error(err))
 		return nil, constants.ErrSystem
 	}
-	defer tx.Rollback()
+	defer func(tx *sql.Tx) {
+		err := tx.Rollback()
+		if err != nil {
+			r.log.Error("failed to rollback tx", zap.Error(err))
+		}
+	}(tx)
 
 	firstID, secondID := req.SourceID, req.DestinationID
 	if firstID > secondID {
