@@ -455,7 +455,7 @@ Response:
 
 ### Transfer Money
 
-POST /transfer
+POST /transfers
 
 Request:
 ```json
