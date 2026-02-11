@@ -1,7 +1,7 @@
 # 🏦 Account Transfer System
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/yourusername/account-transfer-project)](https://goreportcard.com/report/github.com/yourusername/account-transfer-project)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/account-transfer-project)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jhaprabhatt/account-transfer-project)](https://goreportcard.com/report/github.com/jhaprabhatt/account-transfer-project)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/jhaprabhatt/account-transfer-project)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A high-performance, thread-safe financial transaction system built in Go. This project implements a secure money transfer service using a Hexagonal Architecture (Ports & Adapters) pattern, ensuring strict separation of concerns, testability, and scalability.
@@ -21,7 +21,7 @@ The system is designed with a **Clean Architecture** approach:
 
 ### Tech Stack
 
-* **Language:** Golang (1.21+)
+* **Language:** Golang (1.25)
 * **Communication:** gRPC / Protocol Buffers
 * **Database:** PostgreSQL (Serializable Transactions)
 * **Caching:** Redis (Read-through / Write-through caching)
@@ -47,14 +47,14 @@ The system is designed with a **Clean Architecture** approach:
 
 ### Prerequisites
 
-* Go 1.21+
+* Go 1.25
 * Docker & Docker Compose
 * Make (optional, for running Makefile commands)
 
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/yourusername/account-transfer-project.git](https://github.com/yourusername/account-transfer-project.git)
+git clone [https://github.com/jhaprabhatt/account-transfer-project.git](https://github.com/yourusername/account-transfer-project.git)
 cd account-transfer-project
 ```
 
