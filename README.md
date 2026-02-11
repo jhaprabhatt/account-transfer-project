@@ -61,9 +61,118 @@ The system follows **Clean Architecture principles**.
 
 ---
 
-## 🔐 Concurrency & Deadlock Prevention
+## 🏗 Architecture & Request Flow
 
-Transfers always lock accounts in deterministic order:
+The system follows a two-service architecture:
+
+1. REST API Service
+2. Core Banking Service (gRPC)
+
+The REST service acts as a transport layer and delegates all business logic to the Core service.
+
+---
+
+### 🔁 High-Level Flow
+
+Client → REST API → gRPC → Core Service → PostgreSQL + Redis → Response
+
+---
+
+## 1️⃣ REST Service (Transport Layer)
+
+Responsibilities:
+
+- Accept HTTP requests
+- Parse JSON payload
+- Perform basic input validation
+- Return early on validation failure
+- Forward validated requests to Core service via gRPC
+
+Flow:
+
+1. Receive HTTP request
+2. Validate request payload (required fields, format, basic checks)
+3. If validation fails:
+   - Return 4xx response immediately
+4. If validation succeeds:
+   - Construct gRPC request
+   - Send request to Core service
+   - Await response
+5. Translate gRPC response → HTTP response
+
+The REST layer contains **no business logic**.
+
+---
+
+## 2️⃣ Core Service (Business Logic Layer)
+
+The Core service is responsible for:
+
+- Business validation
+- Balance checks
+- Transaction processing
+- Database operations
+- Redis cache interaction
+- Concurrency control
+- Deadlock avoidance
+
+---
+
+### 🔐 Core Service Processing Flow
+
+1. Receive gRPC request
+2. Perform validation using Redis cache
+   - Validate account existence
+   - Validate account state
+3. If validation fails:
+   - Return error response
+4. If validation succeeds:
+   - Start PostgreSQL transaction
+   - Lock accounts in deterministic order
+   - Perform balance checks
+   - Update balances
+   - Commit transaction
+5. Update Redis cache accordingly
+6. Return success response
+
+---
+
+## 🧠 Redis Usage Strategy
+
+Redis is used as:
+
+- Fast validation layer
+- Account existence lookup
+- Read-optimization layer
+
+### Cache Initialization
+
+- When Core service boots up:
+   - It loads relevant account metadata into Redis
+   - This enables fast validation during transfers
+
+### Cache Update Strategy
+
+- Redis is updated within the transaction flow
+- Database remains the source of truth
+- Cache is kept consistent after DB commit
+
+Redis is treated as an optimization layer, not a system of record.
+
+---
+
+## 🗄 Database (Source of Truth)
+
+- PostgreSQL is the primary datastore
+- Serializable isolation level is used
+- Row-level locking prevents race conditions
+- Deterministic lock ordering prevents deadlocks
+
+---
+
+## 🛡 Concurrency Model
+
+Transfers lock accounts in sorted order:
 
 ```go
 firstID, secondID := req.SourceID, req.DestinationID
@@ -72,7 +181,33 @@ firstID, secondID = secondID, firstID
 }
 ```
 
-This prevents circular lock acquisition and eliminates database-level deadlocks under concurrent transfers.
+This guarantees:
+
+- No circular lock dependencies
+- No deadlocks
+- Deterministic transaction ordering
+
+---
+
+## 📌 Separation of Concerns
+
+REST Service:
+- Transport
+- Input validation
+- Protocol translation
+
+Core Service:
+- Business rules
+- Transaction management
+- Data integrity
+- Cache management
+
+This separation enables:
+
+- Independent scaling
+- Clear ownership boundaries
+- Clean architecture principles
+- Easier testability
 
 ---
 
@@ -106,19 +241,43 @@ This prevents circular lock acquisition and eliminates database-level deadlocks 
 ```
 .
 ├── cmd
-│   └── server
+│   ├── api                 # REST API entrypoint
+│   │   └── main.go
+│   └── core                # Core gRPC service entrypoint
+│       └── main.go
+│
+├── deploy
+│   └── postgres
+│       └── init.sql        # DB initialization scripts
+│
 ├── internal
-│   ├── config
-│   ├── handler
-│   ├── service
-│   ├── repository
-│   ├── models
-│   └── proto
-├── migrations
+│   ├── api
+│   │   ├── handler         # HTTP handlers (transport layer)
+│   │   └── middleware      # HTTP middleware
+│   │
+│   ├── config              # Configuration loading & environment parsing
+│   ├── constants           # Application-wide constants
+│   │
+│   ├── core
+│   │   ├── handler         # gRPC handlers
+│   │   └── interceptors    # gRPC interceptors (tracing)
+│   │
+│   ├── grpcclient          # gRPC client used by API service
+│   ├── logger              # Structured logging setup (Zap)
+│   ├── models              # Domain models / entities
+│   ├── pkg                 # Shared internal utilities
+│   ├── proto               # Protobuf definitions / generated files
+│   ├── repository          # PostgreSQL + Redis data access
+│   └── service             # Business logic (use cases)
+│
+├── .env
 ├── docker-compose.yml
+├── Dockerfile.api
+├── Dockerfile.core
 ├── go.mod
 └── README.md
 ```
+
 
 ---
 
