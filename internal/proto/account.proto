@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package transfer;
+option go_package = "account-transfer-project/internal/proto";
+
+service AccountService {
+  rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse);
+}
+
+message CreateAccountRequest {
+  int64 account_id = 1;
+  string balance = 2;
+}
+
+message CreateAccountResponse {
+  bool success = 1;
+}

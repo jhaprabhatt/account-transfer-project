@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package transfer;
+option go_package = "account-transfer-project/internal/proto";
+
+service TransferService {
+  rpc MakeTransfer (TransferRequest) returns (TransferResponse);
+}
+
+message TransferRequest {
+  int64 source_id = 1;
+  int64 destination_id = 2;
+  string amount = 3;
+}
+
+message TransferResponse {
+  bool success = 1;
+  int64 transaction_id = 2;
+  int64 audit_id = 3;
+  string new_source_balance = 4;
+}

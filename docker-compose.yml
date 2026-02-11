@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: account_transfer_db
+    environment:
+      POSTGRES_DB: account_transfer_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./deploy/postgress/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d account_transfer_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:7-alpine
+    container_name: account_transfer_redis
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning
+  core-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.core
+    container_name: account_transfer_core
+    ports:
+      - "50051:50051"
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=account_transfer_db
+      - REDIS_ADDR=redis:6379
+      - REDIS_PASSWORD=
+      - GRPC_PORT=50051
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+  api-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: account_transfer_api
+    ports:
+      - "8080:8080"
+    environment:
+      - CORE_HOST=core-service:50051
+    depends_on:
+      - core-service
